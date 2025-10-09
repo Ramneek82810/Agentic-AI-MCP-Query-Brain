@@ -1,0 +1,195 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    container_name: backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - memory
+      - sql_tool
+    networks:
+      - mcp_net
+    env_file:
+      - .env
+      - .env.api
+
+  backend2:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    container_name: backend2
+    ports:
+      - "8001:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - memory2
+      - sql_tool2
+    networks:
+      - mcp_net
+    env_file:
+      - .env
+      - .env.api2
+
+  backend3:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    container_name: backend3
+    ports:
+      - "8002:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - memory3
+      - sql_tool3
+    networks:
+      - mcp_net
+    env_file:
+      - .env
+      - .env.api3
+
+  sql_tool:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.sql_tool
+    container_name: sql_tool
+    ports:
+      - "8003:8002"
+    depends_on:
+      - mcp_redis
+ #     - postgres
+    networks:
+      - mcp_net
+    env_file:
+      - .env
+
+  sql_tool2:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.sql_tool
+    container_name: sql_tool2
+    ports:
+      - "8004:8002"
+    depends_on:
+      - mcp_redis
+ #     - postgres
+    networks:
+      - mcp_net
+    env_file:
+      - .env
+
+  sql_tool3:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.sql_tool
+    container_name: sql_tool3
+    ports:
+      - "8005:8002"
+    depends_on:
+      - mcp_redis
+  #    - postgres
+    networks:
+      - mcp_net
+    env_file:
+      - .env
+
+  memory:
+    image: redis:7
+    container_name: memory
+    ports:
+      - "6380:6379"
+    restart: always
+    networks:
+      - mcp_net
+
+  memory2:
+    image: redis:7
+    container_name: memory2
+    ports:
+      - "6381:6379"
+    restart: always
+    networks:
+      - mcp_net
+
+  memory3:
+    image: redis:7
+    container_name: memory3
+    ports:
+      - "6382:6379"
+    restart: always
+    networks:
+      - mcp_net
+
+  mcp_redis:
+    image: redis:7
+    container_name: mcp_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+    networks:
+      - mcp_net
+
+  # postgres:
+  #   image: postgres:15
+  #   container_name: vartopia-postgres-1
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: vendor_user_user
+  #     POSTGRES_PASSWORD: hj0qzUtXoFH94jNFWF2K8YnPCqlhDomt
+  #     POSTGRES_DB: vendor_user
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - ./init_data.sql:/docker-entrypoint-initdb.d/init_data.sql
+  #   env_file:
+  #     - .env
+  #   networks:
+  #     - mcp_net
+
+  mcp_nginx:
+    image: nginx:latest
+    container_name: mcp-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./mcp_client/build:/usr/share/nginx/html:ro
+    depends_on:
+      - backend
+      - backend2
+      - backend3
+      - sql_tool
+      - sql_tool2
+      - sql_tool3
+      - mcp_client
+    networks:
+      - mcp_net
+
+  mcp_client:
+    build:
+      context: .
+      dockerfile: mcp_client/docker/dockerfile.frontend
+    container_name: mcp_client
+    depends_on:
+      - backend
+      - backend2
+      - backend3
+    networks:
+      - mcp_net
+    environment:
+      - REACT_APP_API_URL=http://backend:8000/api/ask_agent
+
+volumes:
+  redis_data:
+  pg_data:
+
+networks:
+  mcp_net:
+    driver: bridge

@@ -1,0 +1,104 @@
+/* App.css */
+
+/* Global Reset */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Main Chat Container */
+.chat-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.chat-header {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* Scrollable Chat Area */
+.chat-box {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  min-height: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #fafafa;
+  scrollbar-width: thin;
+}
+
+/* Chat Messages */
+.chat-message {
+  margin: 12px 0;
+  padding: 12px;
+  max-width: 80%;
+  border-radius: 10px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+/* User Message Style */
+.chat-message.user {
+  background-color: #e1f5fe;
+  margin-left: auto;
+  text-align: right;
+  border-top-right-radius: 0;
+}
+
+/* Bot Message Style */
+.chat-message.bot {
+  background-color: #e8f5e9;
+  margin-right: auto;
+  text-align: left;
+  border-top-left-radius: 0;
+}
+
+/* Input Area */
+.chat-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Text Input */
+.chat-input input {
+  flex: 1;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.chat-input input:focus {
+  border-color: #2196f3;
+  box-shadow: 0 0 3px #2196f3;
+}
+
+/* Send Button */
+.chat-input button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: none;
+  background-color: #2196f3;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.chat-input button:hover {
+  background-color: #1976d2;
+}
