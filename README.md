@@ -50,8 +50,8 @@ Agentic-AI-MCP-Query-Brain/
 ├── main_stdio.py               # MCP host via stdio runner
 ├── requirements.txt            # Python dependencies
 ├── docker-compose.yml          # Multi-container orchestration
-├── nginx.conf                   # NGINX configuration
-└── README.md                    # This documentation
+├── nginx.conf                  # NGINX configuration
+└── README.md                   # This documentation
 ```
 
 ---
@@ -184,4 +184,5 @@ Formatted JSON or Natural Language Response
 ## 📄 License
 
 This project is licensed under the **MIT License** — free to use, modify, and distribute with attribution.
+
 
