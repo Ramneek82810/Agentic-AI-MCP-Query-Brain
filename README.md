@@ -9,7 +9,7 @@ An intelligent, agentic system built with **Model Context Protocol (MCP)** that 
 This project enables you to ask questions in plain English and receive structured data answers. It does so using:
 
 - A **modular MCP architecture** for agent-to-tool communication  
-- **FastAPI microservices** hosting API endpoints  
+- **FastAPI microservices** hosting API endpoints   
 - **Redis memory** for storing conversational context  
 - **OpenAI / LLM integration** for generating SQL  
 - **PostgreSQL backend** for executing queries  
@@ -184,5 +184,6 @@ Formatted JSON or Natural Language Response
 ## 📄 License
 
 This project is licensed under the **MIT License** — free to use, modify, and distribute with attribution.
+
 
 
