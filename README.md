@@ -3,7 +3,7 @@
 An intelligent, agentic system built with **Model Context Protocol (MCP)** that transforms natural language queries into SQL, executes them against a database, and returns human-friendly results. Powered by modular microservices, Redis memory, and PostgreSQL for robust, context-aware querying.
 
 ---
-  
+   
 ## 📌 Overview
 
 This project enables you to ask questions in plain English and receive structured data answers. It does so using:
